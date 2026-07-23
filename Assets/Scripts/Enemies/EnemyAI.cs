@@ -72,10 +72,7 @@ public class EnemyAI : MonoBehaviour
 
     private void HandlePatrol()
     {
-        if(patrolTarget == null)
-        {
-            patrolTarget = enemy.GetRandomPosition();
-        }
+        
         //DEBUG escribimos al log para saber si esta calculando la distancia al jugador
         float distance = Vector2.Distance(transform.position, patrolTarget);
         Debug.Log($"[HandlePatrol] Moviendo a {patrolTarget}. Distancia restante: {distance}");

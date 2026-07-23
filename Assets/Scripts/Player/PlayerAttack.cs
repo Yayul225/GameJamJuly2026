@@ -62,8 +62,8 @@ public class PlayerAttack : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             //ACTIVALO DESPUES CUANDO ESTEN LOS ENEMIGOS
-            //other.GetComponent<Enemy>().TakeDamage(punchDamage);
-            //Debug.Log("enemy hit");
+            other.GetComponent<Enemy>().TakeDamage(punchDamage);
+            Debug.Log("enemy hit");
         }
     }
 }

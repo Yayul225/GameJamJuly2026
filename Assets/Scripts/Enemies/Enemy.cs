@@ -12,10 +12,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] float patrolRadius = 5f;
 
     //VARIABLES DE ATAQUE
+    [SerializeField] private EnemyAttack attack;
     [SerializeField] public float attackRadius = 1f; //la ia leera este valor
     [SerializeField] float attackCoolDown = 1f;
-    [SerializeField] float attackDamage = 25f;
+    [SerializeField] float attackDamage = 25f; //TALVEZ QUITARLO SI NO SE USA EN EL ATAQUE
     private float lastAttackTime = 0f;
+    
 
     bool isDead = false;
     [SerializeField] float health = 100f;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        attack = GetComponent<EnemyAttack>();
     }
 
     public void MoveTo(Vector2 targetPos)
@@ -33,6 +36,8 @@ public class Enemy : MonoBehaviour
         Vector2 direction = (targetPos - currentPos).normalized; //calculamos la direccion hacia el objetivo
 
         float distanceToTarget = Vector2.Distance(currentPos, targetPos); //calculamos la distancia al objetivo
+
+        
 
         rb.linearVelocity = direction * moveSpeed;
         FaceTarget(targetPos);
@@ -65,7 +70,7 @@ public class Enemy : MonoBehaviour
     {
         lastAttackTime = Time.time;//actualizamos el tiempo del ultimo ataque
         //PLACEHOLDER: Aqui iria la logica de ataque, como por ejemplo restar vida al jugador
-        Debug.Log($"{name} ataca por " + attackDamage + " daño!");
+        attack.Execute();
     }
 
     public void TakeDamage(float damage)
