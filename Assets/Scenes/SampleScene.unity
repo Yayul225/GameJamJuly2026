@@ -2194,7 +2194,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CountDownScript
   uiFill: {fileID: 698316754}
   uiText: {fileID: 1417714991}
-  Duration: 600
+  countNumber: 10
+  durationNormal: 60
+  durationQuick: 30
+  limitChange: 5
 --- !u!1001 &4007368892979201043
 PrefabInstance:
   m_ObjectHideFlags: 0
