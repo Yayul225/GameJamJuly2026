@@ -22,6 +22,11 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (punchTimer > 0f)
+        {
+            punchTimer -= Time.deltaTime;
+        }
+
         
     }
 
@@ -31,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
 
         if(context.performed  && punchTimer <= 0f)
         {
+            Debug.Log("Estoy DENTRO del ataque");
             //Alternar lado de ataque
             attackRight = !attackRight;
 
