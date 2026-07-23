@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,4 +62,4 @@ public class Timer : MonoBehaviour
         uiFill.fillAmount = 0;
         Debug.Log("Finalizado");
     }
-}*/
+}
