@@ -2386,10 +2386,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CountDownScript
   uiFill: {fileID: 698316754}
   uiText: {fileID: 1417714991}
-  countNumber: 4
-  durationNormal: 10
-  durationQuick: 5
-  limitChange: 2
+  countNumber: 10
+  durationNormal: 60
+  durationQuick: 30
+  limitChange: 5
 --- !u!1001 &4007368892979201043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2440,7 +2440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772784758166342690, guid: 11b302d9ec22122489506ff62783d54f, type: 3}
       propertyPath: m_Name
-      value: Circle1
+      value: Circle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
