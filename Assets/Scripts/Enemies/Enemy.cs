@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -26,9 +27,84 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveTo(Vector2 targetPos)
     {
-        
+        Vector2 currentPos = rb.position; //guardamos posicion actual del enemigo
+        Vector2 direction = (targetPos - currentPos).normalized; //calculamos la direccion hacia el objetivo
+
+        float distanceToTarget = Vector2.Distance(currentPos, targetPos); //calculamos la distancia al objetivo
+
+        rb.linearVelocity = direction * moveSpeed;
+        FaceTarget(targetPos);
+    }
+
+    public void StopMoving()
+    {
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public Vector2 GetRandomPosition()
+    {
+        Vector2 randomOffset = Random.insideUnitCircle * patrolRadius; //generamos un vector aleatorio dentro de un circulo
+        return (Vector2)transform.position + randomOffset; //retornamos la posicion aleatoria sumada a la posicion actual del enemigo
+    }
+
+    public bool CanAttack()
+    {
+        //solo revisamos si el tiempo de enfriamiento ha pasado
+        return Time.time >= lastAttackTime + attackCoolDown;
+    }
+
+    public void TryAttack()
+    {
+        if (CanAttack())
+            Attack();
+    }
+
+    public void Attack()
+    {
+        lastAttackTime = Time.time;//actualizamos el tiempo del ultimo ataque
+        //PLACEHOLDER: Aqui iria la logica de ataque, como por ejemplo restar vida al jugador
+        Debug.Log($"{name} ataca por " + attackDamage + " daño!");
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage; //reducimos salud
+        Debug.Log($"{name} took {damage} damage. Remaining health: {health}"); //debug message para mostrar salud
+
+        if (health <= 0) //si salud llega a cero o menos, el enemigo muere
+            Die();
+    }
+
+    public void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        StopMoving();
+        Debug.Log($"{name} has died!");
+        Destroy(gameObject);
+    }
+
+    public void FaceTarget(Vector2 targetPos)
+    {
+        Vector3 scale = transform.localScale;
+        if (targetPos.x < transform.position.x && scale.x > 0)
+            scale.x *= -1;
+        else if (targetPos.x > transform.position.x && scale.x < 0)
+            scale.x *= -1;
+
+        transform.localScale = scale;
+    }
+
+    // El Gizmos es perfecto, ahora usará los valores de este script
+    // que la IA también leerá.
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
 }
