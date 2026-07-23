@@ -4,61 +4,49 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-
-public class CountDownScript : MonoBehaviour//, IPointerClickHandler
+public class CountDownScript : MonoBehaviour
 {
-    /*public void OnPointerClick(PointerEventData eventData)
-    {
-        Pause = !Pause;
-    }*/
-
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
-    public int Duration; // Duración total en segundos
+    [Header("Configuración Principal")]
+    public int countNumber = 10;            // Número inicial del contador
 
-    private int remainingDuration;
-    //private bool Pause;
+    [Header("Tiempos por Fase")]
+    public int durationNormal = 60;        // Duración (seg) cuando countNumber > limiteCambio
+    public int durationQuick = 30;        // Duración (seg) cuando countNumber <= limiteCambio
+    public int limitChange = 5;           // A partir de qué número cambia la velocidad
 
     private void Start()
     {
-        Begin(Duration);
+        StartCoroutine(StartTimerProcess());
     }
 
-    private void Begin(int Second)
+    private IEnumerator StartTimerProcess()
     {
-        remainingDuration = Second;
-        StartCoroutine(UpdateTimer());
-    }
-
-    private IEnumerator UpdateTimer()
-    {
-        while (remainingDuration >= 0)
+        // Bucle que recorre desde el número inicial (ej. 10) hasta 1
+        while (countNumber > 0)
         {
-            // 1. Muestra solo el minuto actual (ej: "10", "9", "8"...)
-            // Usamos Mathf.CeilToInt para que muestre el minuto actual de forma redondeada hacia arriba
-            int currentMinute = Mathf.CeilToInt(remainingDuration / 60f);
-            uiText.text = currentMinute.ToString();
+            // 1. Mostramos el número actual en el texto
+            uiText.text = countNumber.ToString();
 
-            // 2. Calcula los segundos actuales dentro del ciclo de 1 minuto (0 a 59)
-            int secondsInCurrentMinute = remainingDuration % 60;
+            // 2. Determinamos la duración de la barra para este número en específico
+            int currentProgressBarDuration = (countNumber <= limitChange) ? durationQuick : durationNormal;
 
-            // Si los segundos dan 0 pero aún queda tiempo, la rueda debe estar llena (60s)
-            if (secondsInCurrentMinute == 0 && remainingDuration > 0)
+            // 3. Ejecutamos la animación de la barra para este número
+            int remainingSecondsInStep = currentProgressBarDuration;
+
+            while (remainingSecondsInStep > 0)
             {
-                secondsInCurrentMinute = 60;
+                // Actualizamos la barra de 1.0 a 0.0
+                uiFill.fillAmount = (float)remainingSecondsInStep / currentProgressBarDuration;
+
+                yield return new WaitForSeconds(1f);
+                remainingSecondsInStep--;
             }
 
-            // 3. Rellena la rueda en un rango de 0 a 60 segundos
-            uiFill.fillAmount = Mathf.InverseLerp(0, 60, secondsInCurrentMinute);
-
-            remainingDuration--;
-            yield return new WaitForSeconds(1f);
-            /*if (!Pause)
-            {
-               
-            }
-            yield return null;*/
+            // Al terminar la vuelta de la barra, restamos 1 al contador
+            countNumber--;
         }
 
         OnEnd();
@@ -68,6 +56,6 @@ public class CountDownScript : MonoBehaviour//, IPointerClickHandler
     {
         uiText.text = "0";
         uiFill.fillAmount = 0;
-        print("End");
+        Debug.Log("Temporizador Finalizado");
     }
 }
