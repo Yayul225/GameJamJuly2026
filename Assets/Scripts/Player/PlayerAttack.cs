@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
             punchTimer -= Time.deltaTime;
         }
 
-        
+
     }
 
     public void OnAttack(InputAction.CallbackContext context)
