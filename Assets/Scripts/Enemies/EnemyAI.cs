@@ -105,6 +105,7 @@ public class EnemyAI : MonoBehaviour
 
         enemy.MoveTo(player.position);
         enemy.FaceTarget(player.position);
+        enemy.AimAt(player.position);
     }
 
     private void HandleAttack()
@@ -117,6 +118,7 @@ public class EnemyAI : MonoBehaviour
         }
         enemy.StopMoving();
         enemy.FaceTarget(player.position);
+        enemy.AimAt(player.position);
         enemy.TryAttack();
     }
 
