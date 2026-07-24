@@ -17,7 +17,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float attackCoolDown = 1f;
     [SerializeField] float attackDamage = 25f; //TALVEZ QUITARLO SI NO SE USA EN EL ATAQUE
     private float lastAttackTime = 0f;
-    
+    [SerializeField] Transform firePoint;
+
 
     bool isDead = false;
     [SerializeField] float health = 100f;
@@ -100,6 +101,14 @@ public class Enemy : MonoBehaviour
             scale.x *= -1;
 
         transform.localScale = scale;
+    }
+
+    public void AimAt(Vector2 target)
+    {
+        Vector2 direction = target - (Vector2)firePoint.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        firePoint.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     // El Gizmos es perfecto, ahora usará los valores de este script

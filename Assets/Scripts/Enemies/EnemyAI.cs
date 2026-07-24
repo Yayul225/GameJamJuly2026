@@ -91,7 +91,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if(distance > enemy.detectRadius + 2f) // ajustar este 2f por offset segun el tamaño del enemigo y el jugador
+        if(distance > enemy.detectRadius) // ajustar este 2f por offset segun el tamaño del enemigo y el jugador
         {
             SwitchState(State.Patrol);
             return;

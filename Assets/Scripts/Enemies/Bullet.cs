@@ -17,18 +17,20 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
             }
             Destroy(this.gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(this.gameObject);
         }
