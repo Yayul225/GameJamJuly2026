@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -37,6 +36,8 @@ public class EnemyAI : MonoBehaviour
             SwitchState(State.Idle);
             return;
         }
+        if (enemy.IsBusy)
+            return;
 
         //controla el comportamiento del enemigo dependiendo del estado actual
         switch (currentState)
@@ -75,7 +76,7 @@ public class EnemyAI : MonoBehaviour
         
         //DEBUG escribimos al log para saber si esta calculando la distancia al jugador
         float distance = Vector2.Distance(transform.position, patrolTarget);
-        Debug.Log($"[HandlePatrol] Moviendo a {patrolTarget}. Distancia restante: {distance}");
+        //Debug.Log($"[HandlePatrol] Moviendo a {patrolTarget}. Distancia restante: {distance}");
 
         enemy.MoveTo(patrolTarget);
 
@@ -91,13 +92,13 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if(distance > enemy.detectRadius) // ajustar este 2f por offset segun el tamaño del enemigo y el jugador
+        if(distance > enemy.detectRadius || !enemy.HasLineOffSightTo(player.position)) 
         {
-            SwitchState(State.Patrol);
+            SwitchState(State.Idle);
             return;
         }
         
-        if(distance <= enemy.attackRadius)
+        if(distance <= enemy.attackRadius && enemy.HasLineOffSightTo(player.position))
         {
             SwitchState(State.Attack);
             return;
@@ -111,7 +112,7 @@ public class EnemyAI : MonoBehaviour
     private void HandleAttack()
     {
         float distance = Vector2.Distance(transform.position, player.position);
-        if (distance > enemy.attackRadius)
+        if (distance > enemy.attackRadius || !enemy.HasLineOffSightTo(player.position))
         {
             SwitchState(State.Chase);
             return;
@@ -126,7 +127,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance < enemy.detectRadius)
+        if (distance < enemy.detectRadius && enemy.HasLineOffSightTo(player.position))
         {
             SwitchState(State.Chase);
         }
@@ -136,7 +137,7 @@ public class EnemyAI : MonoBehaviour
         if (currentState == newState) return;
 
         currentState = newState;
-        Debug.Log("Switching to state: " + newState); //REMOVER DEBUG CUANDO TENGAMOS A TODOS LOS ENEMIGOS
+        //Debug.Log("Switching to state: " + newState); //REMOVER DEBUG CUANDO TENGAMOS A TODOS LOS ENEMIGOS
 
         // --- Lógica de Entrada a los Estados ---
         if (newState == State.Idle)
