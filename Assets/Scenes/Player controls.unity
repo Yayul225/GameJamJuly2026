@@ -1914,6 +1914,8 @@ MonoBehaviour:
   stopDistance: 2
   patrolRadius: 5
   spritePivot: {fileID: 1901897814}
+  patrolAreaCenter: {x: 0, y: 0}
+  patrolAreaSize: {x: 10, y: 10}
   attack: {fileID: 1028448749}
   attackRadius: 8
   attackCoolDown: 2
@@ -1972,7 +1974,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -2188,6 +2190,8 @@ MonoBehaviour:
   stopDistance: 3
   patrolRadius: 5
   spritePivot: {fileID: 1869537633}
+  patrolAreaCenter: {x: 0, y: 0}
+  patrolAreaSize: {x: 10, y: 10}
   attack: {fileID: 1082091971}
   attackRadius: 7
   attackCoolDown: 1
@@ -2222,7 +2226,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
