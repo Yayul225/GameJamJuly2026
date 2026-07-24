@@ -7,13 +7,17 @@ public class RushAttack : EnemyAttack
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject dashVisualPrefab;
     [SerializeField] float dashSpeed = 10f;
+    
+    [SerializeField] float damage = 10f;
+
+    [Header("Attack Timing")]
     [SerializeField] float dashChargeTime = 1.5f;
     [SerializeField] float dashDuration = 0.5f;
     [SerializeField] float dashRecoveryTime = 1f;
-    [SerializeField] float damage = 10f;
+
     bool isAttacking;
     private Enemy enemy;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
 
 
     private void Awake()
@@ -43,10 +47,17 @@ public class RushAttack : EnemyAttack
         // aqui desactivamos la animacion de carga y activamos la animacion de dash
 
         //Guardar la direccion
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+        {
+            enemy.AimAt(player.transform.position);
+            enemy.FaceTarget(player.transform.position);
+        }
+
         Vector2 dashDirection = firePoint.right.normalized;
 
         //Parte del Rush o Dash
-
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         Debug.Log("Dashing");
         rb.linearVelocity = dashDirection * dashSpeed; // CHECK IF THIS IS CORRECT
         //aqui activamos la animacion de dash y los efectos visuales del dash
