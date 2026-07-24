@@ -37,6 +37,8 @@ public class EnemyAI : MonoBehaviour
             SwitchState(State.Idle);
             return;
         }
+        if (enemy.IsBusy)
+            return;
 
         //controla el comportamiento del enemigo dependiendo del estado actual
         switch (currentState)
@@ -75,7 +77,7 @@ public class EnemyAI : MonoBehaviour
         
         //DEBUG escribimos al log para saber si esta calculando la distancia al jugador
         float distance = Vector2.Distance(transform.position, patrolTarget);
-        Debug.Log($"[HandlePatrol] Moviendo a {patrolTarget}. Distancia restante: {distance}");
+        //Debug.Log($"[HandlePatrol] Moviendo a {patrolTarget}. Distancia restante: {distance}");
 
         enemy.MoveTo(patrolTarget);
 
@@ -136,7 +138,7 @@ public class EnemyAI : MonoBehaviour
         if (currentState == newState) return;
 
         currentState = newState;
-        Debug.Log("Switching to state: " + newState); //REMOVER DEBUG CUANDO TENGAMOS A TODOS LOS ENEMIGOS
+        //Debug.Log("Switching to state: " + newState); //REMOVER DEBUG CUANDO TENGAMOS A TODOS LOS ENEMIGOS
 
         // --- Lógica de Entrada a los Estados ---
         if (newState == State.Idle)

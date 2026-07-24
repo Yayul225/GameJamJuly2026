@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     //VARIABLES DE MOVIEMIENTO
     [SerializeField] public float detectRadius = 5f; //la IA leera este valor
@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float attackDamage = 25f; //TALVEZ QUITARLO SI NO SE USA EN EL ATAQUE
     private float lastAttackTime = 0f;
     [SerializeField] Transform firePivot;
+
+    public bool IsBusy { get; private set; }
 
 
     bool isDead = false;
@@ -115,6 +117,11 @@ public class Enemy : MonoBehaviour
 
         //aplicamos la rotacion al pivote de disparo
         firePivot.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public void SetBusy(bool busy)
+    {
+        IsBusy = busy;
     }
 
     // El Gizmos es perfecto, ahora usará los valores de este script
