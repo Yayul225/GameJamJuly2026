@@ -17,10 +17,24 @@ public class DropPoint : MonoBehaviour
 
         // Opcional: Desactivar el Collider para que ni el jugador ni otros ítems
         // vuelvan a disparar eventos con este DropPoint
-        Collider2D col = GetComponent<Collider2D>();
+        /*Collider2D col = GetComponent<Collider2D>();
         if (col != null)
         {
             col.enabled = false;
+        }*/
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            Vacate();
         }
+    }
+
+    public void Vacate()
+    {
+        isOccupied = false;
+        Debug.Log($"El DropPoint{gameObject.name} vuelve a estar disponible.");
     }
 }
