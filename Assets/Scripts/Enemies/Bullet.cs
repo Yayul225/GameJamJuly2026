@@ -19,9 +19,9 @@ public class Bullet : MonoBehaviour
 
     
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.CompareTag("Wall"))
+        else if (other.CompareTag("Wall"))
         {
             Destroy(this.gameObject);
         }

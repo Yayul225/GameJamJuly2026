@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float stopDistance = 1f;
     [SerializeField] float patrolRadius = 5f;
+    [SerializeField] Transform spritePivot; //punto de pivote del sprite para rotarlo hacia el jugador
+
 
     //VARIABLES DE ATAQUE
     [SerializeField] private EnemyAttack attack;
@@ -17,7 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float attackCoolDown = 1f;
     [SerializeField] float attackDamage = 25f; //TALVEZ QUITARLO SI NO SE USA EN EL ATAQUE
     private float lastAttackTime = 0f;
-    [SerializeField] Transform firePoint;
+    [SerializeField] Transform firePivot;
 
 
     bool isDead = false;
@@ -94,21 +96,25 @@ public class Enemy : MonoBehaviour
 
     public void FaceTarget(Vector2 targetPos)
     {
-        Vector3 scale = transform.localScale;
+        Vector3 scale = spritePivot.localScale;
         if (targetPos.x < transform.position.x && scale.x > 0)
             scale.x *= -1;
         else if (targetPos.x > transform.position.x && scale.x < 0)
             scale.x *= -1;
 
-        transform.localScale = scale;
+        spritePivot.localScale = scale;
     }
 
     public void AimAt(Vector2 target)
     {
-        Vector2 direction = target - (Vector2)firePoint.position;
+        //calculamos la rotacion necesaria para apuntar al objetivo
+        Vector2 direction = target - (Vector2)transform.position;
+
+        //calculamos el angulo en grados usando Atan2
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        firePoint.rotation = Quaternion.Euler(0, 0, angle);
+        //aplicamos la rotacion al pivote de disparo
+        firePivot.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     // El Gizmos es perfecto, ahora usará los valores de este script
