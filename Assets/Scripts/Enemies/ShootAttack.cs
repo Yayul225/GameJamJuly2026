@@ -4,7 +4,6 @@ public class ShootAttack : EnemyAttack
 {
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform playerPos;  //maybe remove?
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float damage = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +17,7 @@ public class ShootAttack : EnemyAttack
 
         if(bulletScript != null)
         {
-            bulletScript.Initialize(firePoint.up, bulletSpeed, damage);
+            bulletScript.Initialize(firePoint.right, bulletSpeed, damage);
         }
     }
 }
