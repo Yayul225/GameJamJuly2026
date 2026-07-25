@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float  punchCoolDown = 0.4f;
     [SerializeField] private float punchDamage = 50f;
     bool attackRight = false;
+    bool isAttacking = false;
     float punchTimer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
             attackRight = !attackRight;
 
             //cambiar parametros de animator
+            isAttacking = true;
             anim.SetBool("isAttacking", true);
             anim.SetBool("isAttackingRight", attackRight);
 
@@ -55,10 +57,14 @@ public class PlayerAttack : MonoBehaviour
     void StopAttack()
     {
         anim.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (!isAttacking) return;
+
         if (other.CompareTag("Enemy"))
         {
             //ACTIVALO DESPUES CUANDO ESTEN LOS ENEMIGOS

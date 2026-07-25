@@ -628,7 +628,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.1, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.7, y: 1.1}
   m_Direction: 1
 --- !u!114 &1168720549369039735
@@ -689,6 +689,7 @@ MonoBehaviour:
   dashVisualPrefab: {fileID: 0}
   dashSpeed: 10
   damage: 10
+  knockbackForce: 12
   dashChargeTime: 1.5
   dashDuration: 0.7
   dashRecoveryTime: 1.5

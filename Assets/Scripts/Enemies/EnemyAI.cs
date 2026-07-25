@@ -9,6 +9,9 @@ public class EnemyAI : MonoBehaviour
     private enum State { Idle, Patrol, Chase, Attack, Dead }
     private State currentState;
 
+    [Header("Turret / Stationary Settings")]
+    [SerializeField] private bool isStationary = false;
+
     [SerializeField] private float idleTime = 2f; //tiempo que el enemigo permanece en estado Idle
     private float idleTimer = 0f;
 
@@ -97,8 +100,22 @@ public class EnemyAI : MonoBehaviour
             SwitchState(State.Idle);
             return;
         }
-        
-        if(distance <= enemy.attackRadius && enemy.HasLineOffSightTo(player.position))
+
+        // If stationary, aim and attack as long as player is in detectRadius
+        if (isStationary)
+        {
+            enemy.StopMoving();
+            enemy.FaceTarget(player.position);
+            enemy.AimAt(player.position);
+
+            if (enemy.CanAttack())
+            {
+                enemy.TryAttack();
+            }
+            return;
+        }
+
+        if (distance <= enemy.attackRadius && enemy.HasLineOffSightTo(player.position))
         {
             SwitchState(State.Attack);
             return;
