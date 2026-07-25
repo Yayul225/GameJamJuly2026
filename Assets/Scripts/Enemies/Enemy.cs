@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     //VARIABLES DE MOVIEMIENTO
     [SerializeField] public float detectRadius = 5f; //la IA leera este valor
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float stopDistance = 1f;
     [SerializeField] float patrolRadius = 5f;
     [SerializeField] Transform spritePivot; //punto de pivote del sprite para rotarlo hacia el jugador
 

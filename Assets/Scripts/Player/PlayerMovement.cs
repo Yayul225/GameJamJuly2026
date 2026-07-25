@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
+    private PlayerHealth playerHealth;
 
     [SerializeField] float moveSpeed = 5f;
     private Vector2 moveDir;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Obtenemos el componente Rigidbody2D del objeto al que está adjunto este script
         rb = GetComponent<Rigidbody2D>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     
@@ -33,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        if (playerHealth != null && playerHealth.IsKnockedBack())
+        {
+            return; // Dejamos que el knockback ocurra y no nos deja movernos
+        }
+
         //movernos con fisicas
         //si no hay movimiento en ninguna dirección, establecemos la velocidad lineal del Rigidbody2D a cero
         if (moveDir == Vector2.zero)
