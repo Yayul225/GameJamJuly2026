@@ -123,8 +123,14 @@ public class Enemy : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        StopMoving();
-        Debug.Log($"{name} has died!");
+
+        StopAllCoroutines(); //detenemos todas las corutinas que pueda estar ejecutando el enemigo
+        StopMoving(); //detenemos el movimiento del enemigo
+
+        if (TryGetComponent<Collider2D>(out Collider2D col))
+        {
+            col.enabled = false; // Prevents dead enemy from taking hits or blocking player
+        }
         Destroy(gameObject);
     }
 
@@ -167,7 +173,7 @@ public class Enemy : MonoBehaviour
         IsBusy = busy;
     }
 
-    public void setPatrolZone(Vector2 center, Vector2 size)
+    public void SetPatrolZone(Vector2 center, Vector2 size)
     {
         patrolAreaCenter = center;
         patrolAreaSize = size;
