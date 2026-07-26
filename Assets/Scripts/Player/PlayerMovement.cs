@@ -13,15 +13,20 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        //Obtenemos el componente Rigidbody2D del objeto al que está adjunto este script
-        rb = GetComponent<Rigidbody2D>();
+        // Use Awake for GetComponent to ensure references exist BEFORE scene updates
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
         playerHealth = GetComponent<PlayerHealth>();
     }
 
-    
+    private void OnDisable()
+    {
+        // Reset move direction if player is disabled/reloaded
+        moveDir = Vector2.zero;
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -29,27 +34,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        //Obtenemos la dirección de movimiento a partir del input del jugador
-        moveDir = context.ReadValue<Vector2>().normalized;
+        // Read input during performed and canceled phases
+        if (context.performed || context.canceled)
+        {
+            moveDir = context.ReadValue<Vector2>().normalized;
+        }
     }
 
     private void Move()
     {
         if (playerHealth != null && playerHealth.IsKnockedBack())
         {
-            return; // Dejamos que el knockback ocurra y no nos deja movernos
+            return; // Allow knockback physics to process uninterrupted
         }
 
-        //movernos con fisicas
-        //si no hay movimiento en ninguna dirección, establecemos la velocidad lineal del Rigidbody2D a cero
-        if (moveDir == Vector2.zero)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        //si hay movimiento, establecemos la velocidad lineal del Rigidbody2D en la dirección de movimiento multiplicada por la velocidad de movimiento
-        else
-        {
-            rb.linearVelocity = moveDir * moveSpeed;
-        }
+        rb.linearVelocity = moveDir * moveSpeed;
     }
 }

@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52958d7296f5016478b3321131832e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  health: 100
+  health: 5
   knockBackTime: 0.4
 --- !u!1 &8570681094878444227
 GameObject:

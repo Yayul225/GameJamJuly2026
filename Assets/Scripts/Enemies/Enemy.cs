@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage; //reducimos salud
-        Debug.Log($"{name} took {damage} damage. Remaining health: {health}"); //debug message para mostrar salud
+        
 
         if (health <= 0) //si salud llega a cero o menos, el enemigo muere
             Die();

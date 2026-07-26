@@ -167,8 +167,6 @@ public class EnemyAI : MonoBehaviour
             // Cada vez que entremos a Patrullar,
             // obtenemos un nuevo punto aleatorio.
             patrolTarget = enemy.GetRandomPosition();
-
-            Debug.Log($"[SwitchState] Nuevo patrolTarget elegido: {patrolTarget}. Posición actual: {transform.position}");//REMOVER DEBUG CUANDO TENGAMOS A TODOS LOS ENEMIGOS
         }
     }
 }

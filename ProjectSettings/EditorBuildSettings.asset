@@ -9,6 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 88cc4fea0845100469af248eac155708
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 29d15ee5a99271044841c47de7e353ae
+  - enabled: 1
+    path: Assets/Scenes/Farm Level.unity
+    guid: 18b6e1e1084d7f548a726ee7f3b4a0e7
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: 23c008e2d5f2fbd4c80d960d9fa1b83e
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: ccb643413be21904aa4c4f50c31d210a
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
