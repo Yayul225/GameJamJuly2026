@@ -1178,7 +1178,7 @@ MonoBehaviour:
   firePoint: {fileID: 5758700885101210837}
   bulletPrefab: {fileID: 6607520283623043212, guid: 8630bcf5634c61f48956cd7e212097fa, type: 3}
   bulletSpeed: 15
-  damage: 10
+  damage: 1
   chargeTime: 0.5
   recoveryTime: 1
 --- !u!1 &4707864045067183292

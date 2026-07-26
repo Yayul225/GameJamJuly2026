@@ -30,6 +30,11 @@ public class CountDownScript : MonoBehaviour
             // 1. Mostramos el número actual en el texto
             uiText.text = countNumber.ToString();
 
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnTimerTick(countNumber);
+            }
+
             // 2. Determinamos la duración de la barra para este número en específico
             int currentProgressBarDuration = (countNumber <= limitChange) ? durationQuick : durationNormal;
 
@@ -57,5 +62,10 @@ public class CountDownScript : MonoBehaviour
         uiText.text = "0";
         uiFill.fillAmount = 0;
         Debug.Log("Temporizador Finalizado");
+        // Avisarle a Game Manager que lance la escena de GameOver
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TriggerGameOver();
+        }
     }
 }

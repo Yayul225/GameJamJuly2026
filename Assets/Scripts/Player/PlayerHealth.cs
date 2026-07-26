@@ -53,6 +53,11 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         
         Debug.Log($"{name} has died!");
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TriggerGameOver();
+        }
         Destroy(gameObject);
     }
 
