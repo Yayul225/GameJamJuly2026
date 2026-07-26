@@ -1104,6 +1104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rb: {fileID: 0}
   moveSpeed: 10
+  playerInput: {fileID: 7545419994554526445}
 --- !u!114 &7545419994554526445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,8 +1225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52958d7296f5016478b3321131832e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  health: 100
+  health: 5
   knockBackTime: 0.4
+  heartUI: {fileID: 0}
 --- !u!1 &8570681094878444227
 GameObject:
   m_ObjectHideFlags: 0

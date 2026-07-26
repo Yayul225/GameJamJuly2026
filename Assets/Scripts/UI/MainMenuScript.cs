@@ -13,4 +13,14 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("Saliendo...");
         Application.Quit();
     }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene("Farm Level");
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

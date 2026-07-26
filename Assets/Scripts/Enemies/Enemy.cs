@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     //VARIABLES DE MOVIEMIENTO
     [SerializeField] public float detectRadius = 5f; //la IA leera este valor
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float patrolRadius = 5f;
     [SerializeField] Transform spritePivot; //punto de pivote del sprite para rotarlo hacia el jugador
 
     [Header("Patrol Zone Settings")]
@@ -18,7 +17,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyAttack attack;
     [SerializeField] public float attackRadius = 1f; //la ia leera este valor
     [SerializeField] float attackCoolDown = 1f;
-    [SerializeField] float attackDamage = 25f; //TALVEZ QUITARLO SI NO SE USA EN EL ATAQUE
     private float lastAttackTime = 0f;
     [SerializeField] Transform firePivot;
 
@@ -112,7 +110,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage; //reducimos salud
-        Debug.Log($"{name} took {damage} damage. Remaining health: {health}"); //debug message para mostrar salud
+        
 
         if (health <= 0) //si salud llega a cero o menos, el enemigo muere
             Die();

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Timed Events GameObjects")]
     [SerializeField] private GameObject bullEnemy;            // Spawns/Activates at count 8
     [SerializeField] private GameObject babyChickSpawner;    // Activates at count 6
-    [SerializeField] private GameObject playerSpeedBoost;     // Item/Trigger or Boost at count 5
+    [SerializeField] private PlayerMovement player;     // Item/Trigger or Boost at count 5
     [SerializeField] private GameObject destroyableObstacles; // Spawns/Activates at count 4
 
     [Header("Scene Names")]
@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        // Auto-find PlayerMovement if it wasn't assigned in the Inspector
+        if (player == null)
+        {
+            player = FindAnyObjectByType<PlayerMovement>();
+        }
     }
 
     /// <summary>
@@ -37,25 +43,26 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"[GameManager] Timer ticked: {currentCount}");
 
-        // Count 8: Spawn/Activate Bull Enemy
-        if (currentCount == 8 && bullEnemy != null)
+        // Count 8: Activar enemigo toro
+        if (currentCount == 8 && babyChickSpawner != null)
         {
             bullEnemy.SetActive(true);
-            Debug.Log("Enemigo Toro Activado");
-        }
-
-        // Count 6: Activate Baby Chick Spawner
-        if (currentCount == 6 && babyChickSpawner != null)
-        {
-            babyChickSpawner.SetActive(true);
+            
             Debug.Log("Pollitos activados");
         }
 
-        // Count 5: Player Speed Boost
-        if (currentCount == 5 && playerSpeedBoost != null)
+        // Count 6: Activate Baby Chick Spawner
+        if (currentCount == 6 && bullEnemy != null)
         {
-            playerSpeedBoost.SetActive(true);
-            Debug.Log("Boost de Velocidad activado");
+            babyChickSpawner.SetActive(true);
+            Debug.Log("Enemigo Toro Activado");
+        }
+
+        // Count 5: Player Speed Boost
+        if (currentCount == 5 && player != null)
+        {
+            player.ApplySpeedBoost(1.5f);
+            Debug.Log("Boost de Velocidad activado (x1.5)");
         }
 
         // Count 4: Destroyable Obstacles

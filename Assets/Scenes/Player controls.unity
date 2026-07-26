@@ -176,10 +176,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6ab2b5953b2b604883ffe4c03aa45ed, type: 3}
---- !u!4 &385823123 stripped
+--- !u!4 &478446071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3532339875333278142, guid: 6cdf74c22c51b7e4cba83e5fbe742c81, type: 3}
-  m_PrefabInstance: {fileID: 720325876100970688}
+  m_PrefabInstance: {fileID: 1868197202}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &737786570
 GameObject:
@@ -684,10 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5699697bea11fd4488615d2fa0df76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 385823123}
+  target: {fileID: 478446071}
   smoothTime: 0.2
   offset: {x: 0, y: 0, z: -10}
---- !u!1001 &720325876100970688
+--- !u!1001 &1868197202
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -697,11 +697,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3532339875333278142, guid: 6cdf74c22c51b7e4cba83e5fbe742c81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.04
+      value: -7.82
       objectReference: {fileID: 0}
     - target: {fileID: 3532339875333278142, guid: 6cdf74c22c51b7e4cba83e5fbe742c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.95
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 3532339875333278142, guid: 6cdf74c22c51b7e4cba83e5fbe742c81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -948,7 +948,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1843269473}
-  - {fileID: 720325876100970688}
   - {fileID: 737786572}
   - {fileID: 7336932536660078210}
   - {fileID: 1132285210}
@@ -957,3 +956,4 @@ SceneRoots:
   - {fileID: 202624909}
   - {fileID: 1065698444323840030}
   - {fileID: 885537803}
+  - {fileID: 1868197202}

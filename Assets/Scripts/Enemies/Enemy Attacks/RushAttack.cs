@@ -39,7 +39,7 @@ public class RushAttack : EnemyAttack
     {
         isAttacking = true;
         enemy.SetBusy(true);
-        Debug.Log("Rush Attack Started");
+        
 
         // Dash carga
         enemy.StopMoving();
@@ -59,7 +59,7 @@ public class RushAttack : EnemyAttack
 
         //Parte del Rush o Dash
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        Debug.Log("Dashing");
+        
         rb.linearVelocity = dashDirection * dashSpeed;
 
         canDealDamage = true;

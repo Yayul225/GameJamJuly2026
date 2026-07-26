@@ -10,15 +10,32 @@ public class PlayerHealth : MonoBehaviour
     private bool isKnockedBack;
     [SerializeField] float knockBackTime = 1.0f;
 
+    [Header("UI Reference")]
+    [SerializeField] private HeartHealthUI heartUI;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        // Set initial hearts to Red at start
+        if (heartUI != null)
+        {
+            heartUI.UpdateHearts(health);
+        }
+    }
+
     public void TakeDamage(float damage, Vector2 knockbackDirection, float knockbackForce)
     {
         health -= damage;
+
+        if (heartUI != null)
+        {
+            heartUI.UpdateHearts(health);
+        }
         Debug.Log($"{name} took {damage} damage. Remaining health: {health}");
 
         // Aplicar knockback
@@ -38,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         // Reset current velocity & apply impulse force
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
-        Debug.Log("Emujado hacia" + direction);
+        
         // Wait 0.15s - 0.2s while player is pushed
         yield return new WaitForSeconds(knockBackTime);
 

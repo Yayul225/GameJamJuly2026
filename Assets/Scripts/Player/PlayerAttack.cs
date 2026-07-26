@@ -97,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
         if (carriedItem.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb)) rb.simulated = false;
         if (carriedItem.TryGetComponent<Collider2D>(out Collider2D col)) col.enabled = false;
 
-        Debug.Log($"Picked up: {carriedItem.name}");
+        
     }
 
     private void IsNearDropPoint()
@@ -118,9 +118,9 @@ public class PlayerAttack : MonoBehaviour
                 carriedItem = null; // Reset reference
                 isCarryingItem = false;
 
-                Debug.Log("Item delivered to the correct spot!");
+                
 
-                // 🏆 NOTIFY GAME MANAGER OF DELIVERY
+                // NOTIFY GAME MANAGER OF DELIVERY
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.ItemDelivered();
@@ -143,7 +143,7 @@ public class PlayerAttack : MonoBehaviour
         {
             //ACTIVALO DESPUES CUANDO ESTEN LOS ENEMIGOS
             other.GetComponent<Enemy>().TakeDamage(punchDamage);
-            Debug.Log("enemy hit");
+            
         }
         else if (other.CompareTag("Item"))
         {
