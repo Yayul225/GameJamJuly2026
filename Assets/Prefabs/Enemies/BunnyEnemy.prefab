@@ -1176,8 +1176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootAttack
   firePoint: {fileID: 5758700885101210837}
-  bulletPrefab: {fileID: 6607520283623043212, guid: 8630bcf5634c61f48956cd7e212097fa, type: 3}
-  bulletSpeed: 15
+  bulletPrefab: {fileID: 333948833486567118, guid: 28d5a30e768664d408c5b8763ced30a4, type: 3}
+  bulletSpeed: 13
   damage: 1
   chargeTime: 0.5
   recoveryTime: 1

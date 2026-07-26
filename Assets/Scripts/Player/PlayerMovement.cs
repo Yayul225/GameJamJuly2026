@@ -1,28 +1,41 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private PlayerInput playerInput;
     private PlayerHealth playerHealth;
 
-    [SerializeField] float moveSpeed = 5f;
+    [Header("Movement Settings")]
+    [SerializeField] private float playerSpeed = 5f;
     private Vector2 moveDir;
 
-
-
-
-    void Awake()
+    private void Awake()
     {
-        // Use Awake for GetComponent to ensure references exist BEFORE scene updates
         if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (playerInput == null) playerInput = GetComponent<PlayerInput>();
         playerHealth = GetComponent<PlayerHealth>();
+    }
+
+    private void Start()
+    {
+        if (playerInput != null)
+        {
+            playerInput.currentActionMap?.Enable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (playerInput != null)
+        {
+            playerInput.currentActionMap?.Enable();
+        }
     }
 
     private void OnDisable()
     {
-        // Reset move direction if player is disabled/reloaded
         moveDir = Vector2.zero;
         if (rb != null) rb.linearVelocity = Vector2.zero;
     }
@@ -34,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        // Read input during performed and canceled phases
         if (context.performed || context.canceled)
         {
+            Debug.Log("MOviento fase:" + context.phase);
             moveDir = context.ReadValue<Vector2>().normalized;
         }
     }
@@ -48,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
             return; // Allow knockback physics to process uninterrupted
         }
 
-        rb.linearVelocity = moveDir * moveSpeed;
+        rb.linearVelocity = moveDir * playerSpeed;
+    }
+
+    public void ApplySpeedBoost(float multiplier)
+    {
+        playerSpeed *= multiplier;
+        Debug.Log($"Speed boosted! New playerSpeed: {playerSpeed}");
     }
 }
