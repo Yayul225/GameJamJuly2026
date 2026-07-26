@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d7c5c3a53308c43b0315275e51c70c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  isStationary: 0
   idleTime: 2
 --- !u!114 &5780665407841894686
 MonoBehaviour:
@@ -469,7 +470,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   detectRadius: 11
   moveSpeed: 4
-  stopDistance: 3
   patrolRadius: 5
   spritePivot: {fileID: 1694951979419877998}
   patrolAreaCenter: {x: 0, y: 0}
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootAttack
   firePoint: {fileID: 4065377768661923719}
-  bulletPrefab: {fileID: 6607520283623043212, guid: 8630bcf5634c61f48956cd7e212097fa, type: 3}
+  bulletPrefab: {fileID: 8782336605553114407, guid: 0b1e9b0f2ef4cab43b86413d746afa24, type: 3}
   bulletSpeed: 6
   damage: 10
   chargeTime: 1
