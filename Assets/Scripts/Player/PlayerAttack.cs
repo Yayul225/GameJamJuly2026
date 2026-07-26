@@ -119,6 +119,12 @@ public class PlayerAttack : MonoBehaviour
                 isCarryingItem = false;
 
                 Debug.Log("Item delivered to the correct spot!");
+
+                // 🏆 NOTIFY GAME MANAGER OF DELIVERY
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.ItemDelivered();
+                }
             }
             else
             {
@@ -127,10 +133,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void DropItem()
-    {
-
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
