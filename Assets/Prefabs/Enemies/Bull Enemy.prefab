@@ -239,14 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   detectRadius: 25
   moveSpeed: 3
-  patrolRadius: 5
   spritePivot: {fileID: 6853223222815567930}
   patrolAreaCenter: {x: 0, y: 0}
   patrolAreaSize: {x: 20, y: 15}
   attack: {fileID: 45334688889364217}
   attackRadius: 15
   attackCoolDown: 1
-  attackDamage: 1
   firePivot: {fileID: 1780953123174217310}
   obstacleMask:
     serializedVersion: 2

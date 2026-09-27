@@ -736,7 +736,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.6150943, g: 0.2874552, b: 0.054546066, a: 1}
@@ -1136,14 +1136,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   detectRadius: 15
   moveSpeed: 5
-  patrolRadius: 0
   spritePivot: {fileID: 6752768080880756848}
   patrolAreaCenter: {x: 0, y: 0}
   patrolAreaSize: {x: 0, y: 0}
   attack: {fileID: 2742767019984793467}
   attackRadius: 10
   attackCoolDown: 2
-  attackDamage: 25
   firePivot: {fileID: 3316408286195182868}
   obstacleMask:
     serializedVersion: 2

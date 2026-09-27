@@ -69,6 +69,7 @@ public class EnemyAI : MonoBehaviour
         {
             //cambiamos a pratrullar(Switch state, le dara un destino aleatorio)
             SwitchState(State.Patrol);
+            
         }
 
         TryDetectPlayer();
@@ -104,6 +105,7 @@ public class EnemyAI : MonoBehaviour
         // If stationary, aim and attack as long as player is in detectRadius
         if (isStationary)
         {
+            //swtichState(Attack)
             enemy.StopMoving();
             enemy.FaceTarget(player.position);
             enemy.AimAt(player.position);
